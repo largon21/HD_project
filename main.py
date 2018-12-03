@@ -1,5 +1,8 @@
 from myhtml import HTML
 from mysqlite import Database
+from GUI import *
+
+
 
 series_title = input('Nazwa filmu: ')
 
@@ -30,3 +33,11 @@ else:
     print('Dane zostaly zachowane')
 
 # My_DATABASE.show_database()
+
+test = App()
+
+test.CreateWidget()
+# quote = """HAMLET: To be, or not to be--that is the question"""
+# test.Insert_statement(quote)
+test.Insert_DB(DATABASE_records)
+test.Start_App()
