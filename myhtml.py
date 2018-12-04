@@ -4,12 +4,13 @@ from bs4 import BeautifulSoup
 
 
 class HTML:
-    def __init__(self, name):
+    def __init__(self):
 
         self.links = [] #links to websites of series
         self.com_links = []  # links to websites of series
         self.record=[] #data's list of series [title, emission_period , type, comment_head, comment, com_date_time, author, href]
 
+    def Start_extract(self, name):
         name = name.lower()
         URLname = name.replace(' ', '+')
         URL = 'https://www.filmweb.pl/serials/search?q={}'.format(URLname)
@@ -105,6 +106,9 @@ class HTML:
             record=(t, period, autor, date_time_com, comment, head)
             print(record)
             self.record.append(record)
+
+        self.com_links=[]
+
 
     def getRecords(self):
         rec=self.record[:]
