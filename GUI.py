@@ -55,7 +55,7 @@ class App:
         Transform_Button.grid(row=3, column=7, columnspan=7, sticky=NSEW)
 
         # LOAD BUTTON
-        Load_Button = Button(tab1, text='Load', bg=WinColour, command=  lambda : self.Load())
+        Load_Button = Button(tab1, text='Load', bg=WinColour, command=  lambda : self.Thread_Me(self.Load))
         Load_Button.grid(row=3, column=14, columnspan=7, sticky=NSEW)
 
         # EXTRACT TRANSFER LOAD BUTTON
@@ -236,14 +236,14 @@ class App:
         self.ProBar.stop()
 
     def Load(self):
+        My_DATABASE=Database()
+        DATABASE_records = My_DATABASE.select(title=self.title, period='', username='', date='', comment='', head='')
 
-        self.DATABASE_records = self.My_DATABASE.select(title=self.title, period='', username='', date='', comment='', head='')
-
-        buffer = [x for x in self.HTML_records if x not in self.DATABASE_records]  # HTML_records.remove(x)
+        buffer = [x for x in self.HTML_records if x not in DATABASE_records]  # HTML_records.remove(x)
         [print(b) for b in buffer]
         print(len(buffer))
 
-        self.My_DATABASE.load_data(buffer)
+        My_DATABASE.load_data(buffer)
         self.Tbox.delete(1.0, END)
         comment = 'Loaded: ' + self.title
         self.Tbox.insert(END, comment)
