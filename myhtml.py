@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-
+from tkinter import ttk
 
 
 class HTML:
@@ -52,6 +52,8 @@ class HTML:
 
 
     def extract_data(self):
+
+        self.com_links.clear()
         for t, link in self.links:
             URL_discussion=  'https://www.filmweb.pl{}/discussion'.format(link) #creating link to comments of movie
 
@@ -76,7 +78,10 @@ class HTML:
                     break
 
                 URL_discussion = r'https://www.filmweb.pl' + next_tab[0]['href']
+
+
                 print(URL_discussion, '<-- nastepna strona')
+            self.links.clear()
 
     def transform_data(self):
         for t, period, link in self.com_links:
@@ -104,14 +109,18 @@ class HTML:
                 head='brak tematu'
             # grade=
             record=(t, period, autor, date_time_com, comment, head)
+
+
+
             print(record)
             self.record.append(record)
 
-        self.com_links=[]
+        self.com_links.clear()
 
 
     def getRecords(self):
         rec=self.record[:]
+        self.record.clear()
         return rec
 
 

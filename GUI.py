@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from mysqlite import Database
 from myhtml import HTML
+import threading
 
 class App:
     def __init__(self):
@@ -46,15 +47,15 @@ class App:
 
         ################## BUTTONS #################
         # EXTRACT BUTTON
-        Extract_Button = Button(tab1, text='Extract', bg=WinColour, command=self.Extract)
+        Extract_Button = Button(tab1, text='Extract', bg=WinColour, command=lambda : self.Thread_Me(self.Extract))
         Extract_Button.grid(row=3, column=0, columnspan=7, sticky=NSEW)
 
         # TRANSFER BUTTON
-        Transform_Button = Button(tab1, text='Transform', bg=WinColour, command=self.Transform)
+        Transform_Button = Button(tab1, text='Transform', bg=WinColour, command= lambda : self.Thread_Me(self.Transform))
         Transform_Button.grid(row=3, column=7, columnspan=7, sticky=NSEW)
 
         # LOAD BUTTON
-        Load_Button = Button(tab1, text='Load', bg=WinColour, command=self.Load)
+        Load_Button = Button(tab1, text='Load', bg=WinColour, command=  lambda : self.Load())
         Load_Button.grid(row=3, column=14, columnspan=7, sticky=NSEW)
 
         # EXTRACT TRANSFER LOAD BUTTON
@@ -67,7 +68,7 @@ class App:
 
         ###############TEXT FRAME################
         TextFrame = Frame(tab1)
-        TextFrame.grid(row=10, columnspan=21, rowspan=4)
+        TextFrame.grid(row=12, columnspan=21, rowspan=4)
 
         ################### TEXT  - TAB 1#################
         Sbar = Scrollbar(TextFrame)  # SCROLLBAR NEXT TO TEXT BOX
@@ -77,8 +78,9 @@ class App:
         Sbar.config(command=self.Tbox.yview)
         self.Tbox.config(yscrollcommand=Sbar.set)
 
-
-
+        ################ Progressbar ##############
+        self.ProBar=ttk.Progressbar(tab1, orient="horizontal", length=500, mode="determinate")
+        self.ProBar.grid(row=10, columnspan=21, rowspan=1)
         #############TAB 2 - Database###########
         tab2 = Frame(self.main_window)
         Nbook.add(tab2, text='Database')
@@ -202,23 +204,36 @@ class App:
         self.Tbox.insert(END, comment)
 
     def Extract(self):
+        self.ProBar.start()
+        self.ProBar.step()
+
         self.title=self.entry_title.get()
+
 
         if self.title:
             self.My_data_HTML.Start_extract(self.title)
             self.My_data_HTML.extract_data()
-        self.Tbox.delete(1.0, END)
+
         comment='Extracted: '+ self.title
+        self.Tbox.delete(1.0, END)  # removing text if from text box
         self.Tbox.insert(END, comment)
 
+        self.ProBar.stop()
+
+
+
     def Transform(self):
+        self.ProBar.start()
+        self.ProBar.step()
+        self.Tbox.delete(1.0, END)
         self.My_data_HTML.transform_data()
         self.My_data_HTML.showupdata()  # test, print self.data()- list of data
         self.HTML_records = self.My_data_HTML.getRecords()
 
-        self.Tbox.delete(1.0, END)
+
         comment = 'Transformed: ' + self.title
         self.Tbox.insert(END, comment)
+        self.ProBar.stop()
 
     def Load(self):
 
@@ -232,12 +247,15 @@ class App:
         self.Tbox.delete(1.0, END)
         comment = 'Loaded: ' + self.title
         self.Tbox.insert(END, comment)
-        self.HTML_records=[]
+        self.HTML_records.clear()
 
 
     def ETL(self):
         pass
 
+    def Thread_Me(self, my_fun): #creating new thread for 'my_fun'
+        t = threading.Thread(target=my_fun)
+        t.start()
 
 
 
