@@ -59,7 +59,7 @@ class App:
         Load_Button.grid(row=3, column=14, columnspan=7, sticky=NSEW)
 
         # EXTRACT TRANSFER LOAD BUTTON
-        ETL_Button = Button(tab1, text='ETL', bg=WinColour, command=self.ETL)
+        ETL_Button = Button(tab1, text='ETL', bg=WinColour, command= lambda : self.Thread_Me(self.ETL))
         ETL_Button.grid(row=4, columnspan=21, sticky=NSEW)
 
         # EXTRACT TRANSFER LOAD BUTTON
@@ -187,75 +187,95 @@ class App:
 
 
     def SelectFromDB(self):
-        Title=self.Title_filter.get()
-        Period=self.Period_filter.get()
-        User=self.User_filter.get()
-        Date=self.Date_filter.get()
-        Com=self.Com_filter.get()
-        Head=self.Head_filter.get()
+        try:
+            Title=self.Title_filter.get()
+            Period=self.Period_filter.get()
+            User=self.User_filter.get()
+            Date=self.Date_filter.get()
+            Com=self.Com_filter.get()
+            Head=self.Head_filter.get()
 
-        DATABASE_records = self.My_DATABASE.select(title=Title, period=Period, username=User, date=Date, comment= Com, head=Head)
-        self.Insert_DB(DATABASE_records)
+            DATABASE_records = self.My_DATABASE.select(title=Title, period=Period, username=User, date=Date, comment= Com, head=Head)
+            self.Insert_DB(DATABASE_records)
+        except:
+            pass
 
     def RemoveAllDB(self):
-        self.My_DATABASE.delete_all_records()
-        self.Tbox.delete(1.0, END)
-        comment='ALL DATABASE HAS BEEN REMOVED!!!'
-        self.Tbox.insert(END, comment)
+        try:
+            self.My_DATABASE.delete_all_records()
+            self.Tbox.delete(1.0, END)
+            comment='ALL DATABASE HAS BEEN REMOVED!!!'
+            self.Tbox.insert(END, comment)
+        except:
+            pass
 
     def Extract(self):
-        self.ProBar.start()
-        self.ProBar.step()
+        try:
+            self.ProBar.start()
+            self.ProBar.step()
 
-        self.title=self.entry_title.get()
+            self.title=self.entry_title.get()
 
 
-        if self.title:
-            self.My_data_HTML.Start_extract(self.title)
-            self.My_data_HTML.extract_data()
+            if self.title:
+                self.My_data_HTML.Start_extract(self.title)
+                self.My_data_HTML.extract_data()
 
-        comment='Extracted: '+ self.title
-        self.Tbox.delete(1.0, END)  # removing text if from text box
-        self.Tbox.insert(END, comment)
+            comment='Extracted: '+ self.title
+            self.Tbox.delete(1.0, END)  # removing text if from text box
+            self.Tbox.insert(END, comment)
 
-        self.ProBar.stop()
-
+            self.ProBar.stop()
+        except:
+            pass
 
 
     def Transform(self):
-        self.ProBar.start()
-        self.ProBar.step()
-        self.Tbox.delete(1.0, END)
-        self.My_data_HTML.transform_data()
-        self.My_data_HTML.showupdata()  # test, print self.data()- list of data
-        self.HTML_records = self.My_data_HTML.getRecords()
+        try:
+            self.ProBar.start()
+            self.ProBar.step()
+            self.Tbox.delete(1.0, END)
+            self.My_data_HTML.transform_data()
+            self.My_data_HTML.showupdata()  # test, print self.data()- list of data
+            self.HTML_records = self.My_data_HTML.getRecords()
 
 
-        comment = 'Transformed: ' + self.title
-        self.Tbox.insert(END, comment)
-        self.ProBar.stop()
+            comment = 'Transformed: ' + self.title
+            self.Tbox.insert(END, comment)
+            self.ProBar.stop()
+        except:
+            pass
 
     def Load(self):
-        My_DATABASE=Database()
-        DATABASE_records = My_DATABASE.select(title=self.title, period='', username='', date='', comment='', head='')
+        try:
+            My_DATABASE=Database()
+            DATABASE_records = My_DATABASE.select(title=self.title, period='', username='', date='', comment='', head='')
 
-        buffer = [x for x in self.HTML_records if x not in DATABASE_records]  # HTML_records.remove(x)
-        [print(b) for b in buffer]
-        print(len(buffer))
+            buffer = [x for x in self.HTML_records if x not in DATABASE_records]  # HTML_records.remove(x)
+            [print(b) for b in buffer]
+            print(len(buffer))
 
-        My_DATABASE.load_data(buffer)
-        self.Tbox.delete(1.0, END)
-        comment = 'Loaded: ' + self.title
-        self.Tbox.insert(END, comment)
-        self.HTML_records.clear()
+            My_DATABASE.load_data(buffer)
+            self.Tbox.delete(1.0, END)
+            comment = 'Loaded: ' + self.title
+            self.Tbox.insert(END, comment)
+            self.HTML_records.clear()
+        except:
+            pass
 
 
     def ETL(self):
-        pass
+        try:
+            pass
+        except:
+            pass
 
     def Thread_Me(self, my_fun): #creating new thread for 'my_fun'
-        t = threading.Thread(target=my_fun)
-        t.start()
+        try:
+            t = threading.Thread(target=my_fun)
+            t.start()
+        except:
+            pass
 
 
 
