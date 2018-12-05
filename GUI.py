@@ -260,13 +260,19 @@ class App:
             comment = 'Loaded: ' + self.title
             self.Tbox.insert(END, comment)
             self.HTML_records.clear()
+            del My_DATABASE
         except:
             pass
 
 
     def ETL(self):
         try:
-            pass
+            self.Extract()
+            self.Transform()
+            self.Load()
+            comment = 'ETL: ' + self.title
+            self.Tbox.delete(1.0, END)  # removing text if from text box
+            self.Tbox.insert(END, comment)
         except:
             pass
 

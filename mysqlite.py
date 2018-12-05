@@ -27,6 +27,10 @@ class Database:
             selected_values=selected_values[:-1].replace(" ", " AND ")
             self.c.execute("SELECT * from stocks WHERE {}".format(selected_values), tuple(searched_phrases))
             self.selected_records = self.c.fetchall()
+        else :
+            self.c.execute("SELECT * from stocks", tuple(searched_phrases))
+            self.selected_records = self.c.fetchall()
+
 
         chosen_records = self.selected_records[:]
         return chosen_records
