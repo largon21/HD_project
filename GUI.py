@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from mysqlite import Database
 from myhtml import HTML
+import pandas as pd
 import threading
 
 class App:
@@ -62,9 +63,13 @@ class App:
         ETL_Button = Button(tab1, text='ETL', bg=WinColour, command= lambda : self.Thread_Me(self.ETL))
         ETL_Button.grid(row=4, columnspan=21, sticky=NSEW)
 
-        # EXTRACT TRANSFER LOAD BUTTON
+        # UPDATE
+        UPDATE_Button = Button(tab1, text='Update', bg='green', command=self.Update)
+        UPDATE_Button.grid(row=7, column=7, columnspan=3, sticky=NSEW)
+
+        # REMOVE DB BUTTON
         REMOVE_Button = Button(tab1, text='Remove DB', bg='red', command=self.RemoveAllDB)
-        REMOVE_Button.grid(row=7, column=9, columnspan=3, sticky=NSEW)
+        REMOVE_Button.grid(row=7, column=11, columnspan=3, sticky=NSEW)
 
         ###############TEXT FRAME################
         TextFrame = Frame(tab1)
@@ -129,7 +134,11 @@ class App:
 
         ############REFRESH BUTTON############
         self.Refresh_Button=Button(tab2, text='REFRESH', bg=WinColour, command=self.SelectFromDB)
-        self.Refresh_Button.grid(row=3, column=8, columnspan=4, sticky=NSEW)
+        self.Refresh_Button.grid(row=3, column=7, columnspan=3, sticky=NSEW)
+
+        ############ CREATE .CSV ###########
+        CSV_Button = Button(tab2, text='Create CSV', bg='green', command=self.CreateCSV)
+        CSV_Button.grid(row=3, column=11, columnspan=3, sticky=NSEW)
 
         ###########FILTERS#################
         Label(tab2, text='title: ').grid(row=6, column=1, columnspan=1, sticky=NSEW)
@@ -195,10 +204,29 @@ class App:
             Com=self.Com_filter.get()
             Head=self.Head_filter.get()
 
-            DATABASE_records = self.My_DATABASE.select(title=Title, period=Period, username=User, date=Date, comment= Com, head=Head)
-            self.Insert_DB(DATABASE_records)
+            self.DATABASE_records = self.My_DATABASE.select(title=Title, period=Period, username=User, date=Date, comment= Com, head=Head)
+            self.Insert_DB(self.DATABASE_records)
         except:
             pass
+
+    def CreateCSV(self):
+        try:
+            # print(self.DATABASE_records)
+
+            self.TboxDB.delete(1.0, END)
+
+            df=pd.DataFrame(self.DATABASE_records, columns=['title', 'period', 'username', 'date', 'comment', 'head'])
+            df.head()
+            df.to_csv('HD.csv', index=False, encoding='utf-8')
+
+
+
+            comment = 'HD.csv HAS BEEN CREATED'
+            self.TboxDB.insert(END, comment)
+
+        except:
+            pass
+
 
     def RemoveAllDB(self):
         try:
@@ -248,6 +276,8 @@ class App:
 
     def Load(self):
         try:
+            self.ProBar.start()
+            self.ProBar.step()
             My_DATABASE=Database()
             DATABASE_records = My_DATABASE.select(title=self.title, period='', username='', date='', comment='', head='')
 
@@ -261,6 +291,7 @@ class App:
             self.Tbox.insert(END, comment)
             self.HTML_records.clear()
             del My_DATABASE
+            self.ProBar.stop()
         except:
             pass
 
@@ -275,6 +306,9 @@ class App:
             self.Tbox.insert(END, comment)
         except:
             pass
+
+    def Update(self):
+        pass
 
     def Thread_Me(self, my_fun): #creating new thread for 'my_fun'
         try:
