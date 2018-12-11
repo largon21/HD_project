@@ -35,6 +35,24 @@ class Database:
         chosen_records = self.selected_records[:]
         return chosen_records
 
+    def update(self, records):
+        i=0
+        for title, period, username, date, comment, head in records:
+            searched_phrase=comment, head, title, period, username, date
+            self.c.execute("UPDATE stocks SET comment=?, head=? WHERE title=? AND period=? AND username=? AND date=?", tuple(searched_phrase))
+            self.conn.commit()
+            i+=1
+
+        return i
+        # title
+        # period
+        # username
+        # date
+        # comment
+        # head
+
+
+
 
 
     def delete_all_records(self):

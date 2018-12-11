@@ -64,7 +64,7 @@ class App:
         ETL_Button.grid(row=4, columnspan=21, sticky=NSEW)
 
         # UPDATE
-        UPDATE_Button = Button(tab1, text='Update', bg='green', command=self.Update)
+        UPDATE_Button = Button(tab1, text='Update', bg='green', command= lambda : self.Thread_Me(self.Update))
         UPDATE_Button.grid(row=7, column=7, columnspan=3, sticky=NSEW)
 
         # REMOVE DB BUTTON
@@ -177,7 +177,7 @@ class App:
             self.TboxDB.insert(END, comment)
 
         except:
-            pass
+            print("Show_column fail")
 
 
     def Insert_DB(self, DB): #shows all DB which is send
@@ -188,7 +188,7 @@ class App:
             for title, period, username, date, comment, head in  DB:
                 self.Tview.insert("", "end", values=(title, period, username, date, comment, head))
         except:
-            pass
+            print('Insert_DB fail')
 
     def Start_App(self):
         mainloop()
@@ -207,7 +207,7 @@ class App:
             self.DATABASE_records = self.My_DATABASE.select(title=Title, period=Period, username=User, date=Date, comment= Com, head=Head)
             self.Insert_DB(self.DATABASE_records)
         except:
-            pass
+            print('SelectFromDB fail')
 
     def CreateCSV(self):
         try:
@@ -225,7 +225,7 @@ class App:
             self.TboxDB.insert(END, comment)
 
         except:
-            pass
+            print('CreateCSV fail')
 
 
     def RemoveAllDB(self):
@@ -235,7 +235,7 @@ class App:
             comment='ALL DATABASE HAS BEEN REMOVED!!!'
             self.Tbox.insert(END, comment)
         except:
-            pass
+            print('RemoveAllDB update')
 
     def Extract(self):
         try:
@@ -249,13 +249,15 @@ class App:
                 self.My_data_HTML.Start_extract(self.title)
                 self.My_data_HTML.extract_data()
 
-            comment='Extracted: '+ self.title
+            comment='Extracted: ' + str(len(self.My_data_HTML.com_links)) +' records related with: '+ self.title
+
             self.Tbox.delete(1.0, END)  # removing text if from text box
             self.Tbox.insert(END, comment)
 
             self.ProBar.stop()
+            return len(self.My_data_HTML.com_links)
         except:
-            pass
+            print('Extract fail')
 
 
     def Transform(self):
@@ -268,11 +270,12 @@ class App:
             self.HTML_records = self.My_data_HTML.getRecords()
 
 
-            comment = 'Transformed: ' + self.title
+            comment = 'Transformed: '+ str(len(self.HTML_records)) +' records related with: ' + self.title
             self.Tbox.insert(END, comment)
             self.ProBar.stop()
+            return len(self.HTML_records)
         except:
-            pass
+            print('Transform fail')
 
     def Load(self):
         try:
@@ -287,35 +290,48 @@ class App:
 
             My_DATABASE.load_data(buffer)
             self.Tbox.delete(1.0, END)
-            comment = 'Loaded: ' + self.title
+            comment = 'Loaded: '+ str(len(buffer)) +' records related with: ' + self.title
             self.Tbox.insert(END, comment)
             self.HTML_records.clear()
             del My_DATABASE
             self.ProBar.stop()
+            return len(buffer)
         except:
-            pass
+            print('Load fail')
 
 
     def ETL(self):
         try:
-            self.Extract()
-            self.Transform()
-            self.Load()
-            comment = 'ETL: ' + self.title
+            num_E=self.Extract()
+            num_T=self.Transform()
+            num_L=self.Load()
+            comment = 'ETL: extracted: {}, transformed: {}, loaded: {}'.format(num_E, num_T, num_L)+' records related with: '  + self.title
             self.Tbox.delete(1.0, END)  # removing text if from text box
             self.Tbox.insert(END, comment)
         except:
-            pass
+            print('ETL fail')
 
     def Update(self):
-        pass
+        # try:
+        self.Extract()
+        self.Transform()
+        My_DATABASE = Database()
+        numberOFupdatedRECORDS=My_DATABASE.update(self.HTML_records)
+        comment = 'UPDATED: '+ str(numberOFupdatedRECORDS) +' records related with: ' + self.title
+
+        self.Tbox.delete(1.0, END)  # removing text if from text box
+        self.Tbox.insert(END, comment)
+        self.HTML_records.clear()
+        del My_DATABASE
+        # except:
+        #     print("update fail")
 
     def Thread_Me(self, my_fun): #creating new thread for 'my_fun'
         try:
             t = threading.Thread(target=my_fun)
             t.start()
         except:
-            pass
+            print('Thread_Me fail')
 
 
 
