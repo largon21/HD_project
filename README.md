@@ -22,7 +22,10 @@ CREATE TABLE IF NOT EXISTS stocks(
 
 ### Opis wykorzystanych klas
 
-#### Plik myhtml.py - klasa HTML
+
+
+### Plik myhtml.py - klasa HTML
+
 
 ### Klasy wewnêtrzne
 
@@ -36,8 +39,9 @@ Metoda | Parametry | Wartoœæ zwracana | Opis
 ------ | --------- | ---------------- | ----
 Start_extract() | 'name' | Brak | Wyszukuje nazwê serialu podan¹ jako parametr 'name' i zapisuje linki do nich w tablicy 'links'  
 extract_data() | Brak parametrów | Brak | Przeszukuje strony html zapisane w tablicy 'links', odszukuje linki do komentarzy i zapisuje je w tablicy 'com_links'
-transform_data() | Brak parametrów | Przeszukuje strony html zapisane w tablicy 'com_links', odnajduje szukane dane i zapisuje je w tablicy 'record'
+transform_data() | Brak parametrów | Brak | Przeszukuje strony html zapisane w tablicy 'com_links', odnajduje szukane dane i zapisuje je w tablicy 'record'
 getRecords() | Brak parametrów | 'record[]' | Zwraca tablicê 'record'
+
 
 ### Klasy zewnêtrzne 
 
@@ -47,7 +51,8 @@ requests | Pozwala wysy³aæ zapytnia do serverów
 bs4 | Pozwala przeprowadzaæ operacje na plikach html
 
 
-#### Plik mysqlite.py - klasa Database
+### Plik mysqlite.py - klasa Database
+
 
 ### Klasy wewnêtrzne
 
