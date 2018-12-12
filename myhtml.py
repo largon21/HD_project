@@ -124,10 +124,10 @@ class HTML:
         return rec
 
 
-    def showupdata(self):
-
-
-        print(len(self.com_links))
-        print(len(self.record))
+    # def showupdata(self):
+    #
+    #
+    #     print(len(self.com_links))
+    #     print(len(self.record))
 
 

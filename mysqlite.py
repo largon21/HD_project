@@ -59,8 +59,8 @@ class Database:
         self.c.execute('DELETE from stocks')
         self.conn.commit()
 
-    def show_database(self):
-        [print(record) for record in self.c.execute('SELECT * from stocks')]
+    # def show_database(self):
+    #     [print(record) for record in self.c.execute('SELECT * from stocks')]
 
     def __del__(self):
         self.c.close()
