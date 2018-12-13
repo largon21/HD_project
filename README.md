@@ -38,9 +38,9 @@ CREATE TABLE IF NOT EXISTS stocks(
 
 Pole | Wartoœæ
 ---- | -------
-links | Tablica przechowywuj¹ca linki do wybranych seriali
-com_links | Tablica przechowywuj¹ca linki do komentarzy wybranego serialu
-record | Tablica surowych recordów 
+links | Tablica przechowuj¹ca linki do wybranych seriali
+com_links | Tablica przechowuj¹ca linki do komentarzy wybranego serialu
+record | Tablica surowych rekordów 
 
 Metoda | Parametry | Wartoœæ zwracana | Opis
 ------ | --------- | ---------------- | ----
@@ -68,13 +68,13 @@ bs4 | Pozwala przeprowadzaæ operacje na plikach html
 Pole | Wartoœæ
 ---- | -------
 conn | WskaŸnik do bazy danych 'hd.db'
-c | Cursor zmiennej conn wskazuj¹cy na wybran¹ bazê danych
-selected_records | Tablica przechowywuj¹ca wybrane recordy
+c | Kursor zmiennej conn wskazuj¹cy na wybran¹ bazê danych
+selected_records | Tablica przechowuj¹ca wybrane recordy
 
 
 Metoda | Parametry | Wartoœæ zwracana | Opis
 ------ | --------- | ---------------- | ----
-load_data() | 'tuple_data' | Brak | £aduje recordy podane w tablicy krotek 'tuple_data' do bazy danych 'hd.db'
+load_data() | 'tuple_data' | Brak | £aduje rekordy podane w tablicy krotek 'tuple_data' do bazy danych 'hd.db'
 select() | 'title', 'period', 'username', 'date', 'comment', 'head' | 'chosen_records[]' | Wyszukuje frazy podane w parametrach w rekordach zapsianych w bazie danych 'hd.db' i zwraca wynik w postaci taplicy krotek
 update() | 'records' | 'i' | Porównuje rekordy zapisane w bazie danych i aktualizuje je jeœli zosta³y zmienione, zwraca iloœæ sprawdzonych recordów 'i'
 delete_all_records() | Brak parmetrów | Brak | Usuwa ca³¹ zawartoœæ bazy danych 'hd.db'
@@ -158,11 +158,11 @@ Zawiera obiekt klasy 'GUI' pozwalaj¹cy uruchomiæ interface graficzny u¿ytkowanik
 ### Opis programu
 Program pozwala pobieraæ komentarze na temat wybranego serialu ze strony filmweb.pl.
 Pobrane informacje s¹ zapisywane w postaci rekordów w bazie danych 'sqlite'.
-Aby pobraæ opinie o serialu nale¿y wpisaæ jego nazwê w polu opisanym 'Podaj tytu³ serialu', nastêpnie wybraæ przycisk 'Extract', 'Transform', 'Load', lub tylko przycisk load, dane 
+Aby pobraæ opinie o serialu nale¿y wpisaæ jego nazwê w polu opisanym 'Podaj tytu³ serialu', nastêpnie wybraæ przycisk 'Extract', 'Transform', 'Load', lub sam przycisk 'ETL'. Dane 
 s¹ pobierane ze strony 'filmweb.pl', (Extract), przetwarzane na odpowiedni format (Transform) i nastêpnie wysy³ane do bazy danych (Load).
 Program pozwala równie¿ na aktualizacjê wybranego tytu³u (przycisk 'Update') lub wyczyszczenie ca³ej bazy danych (przycisk 'Remove DB').
 Aby przegl¹daæ zawartoœæ bazy danych nale¿y przejœæ do zak³adki 'Database' (lewy górny róg). Po naciœniêciu przycisku 'REFRESH' zostanie wyœwietlona ca³a zawrtoœæ bazy danych aby odfiltrowaæ rekordy nale¿y wpisaæ frazê w wybranym polu i ponownie wcisn¹æ przycisk 'REFRESH'.
-Przycisk 'Create CSV' s³u¿y do utworzenia pliku csv który zawiera wyœwietlane recordy w zak³adce 'Database'. Plik zostanie utworzony w folderze z plikiem 'main.exe'.
+Przycisk 'Create CSV' s³u¿y do utworzenia pliku csv, który zawiera wyœwietlane recordy w zak³adce 'Database'. Plik zostanie utworzony w folderze z plikiem 'main.exe'. 
 
 
 
