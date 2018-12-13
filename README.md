@@ -91,6 +91,8 @@ sqlite3 | Pozwala manipulowaæ baz¹ danych sqlite
 ### Plik GUI.py - klasa App
 
 
+#### Klasy wewnêtrzne
+
 Pole | Wartoœæ
 ---- | -------
 main_window | G³ówne okno programu, obiekt klasy 'tkinter'
