@@ -153,8 +153,16 @@ Zawiera obiekt klasy 'GUI' pozwalaj¹cy uruchomiæ interface graficzny u¿ytkowanik
 
 1. Nale¿y pobraæ repozytorium
 2. W folderze g³ównym nale¿y otworzyæ podfolder 'dist' i uruchomiæ plik wykonywalny 'main.exe'
-3. Opcjonalnie mo¿na utworzyæ skrót folderu w wybranej przez siebie lokalizacji.
+3. Opcjonalnie mo¿na utworzyæ skrót folderu 'dist' w wybranej przez siebie lokalizacji.
 
+### Opis programu
+Program pozwala pobieraæ komentarze na temat wybranego serialu ze strony filmweb.pl.
+Pobrane informacje s¹ zapisywane w postaci rekordów w bazie danych 'sqlite'.
+Aby pobraæ opinie o serialu nale¿y wpisaæ jego nazwê w polu opisanym 'Podaj tytu³ serialu', nastêpnie wybraæ przycisk 'Extract', 'Transform', 'Load', lub tylko przycisk load, dane 
+s¹ pobierane ze strony 'filmweb.pl', (Extract), przetwarzane na odpowiedni format (Transform) i nastêpnie wysy³ane do bazy danych (Load).
+Program pozwala równie¿ na aktualizacjê wybranego tytu³u (przycisk 'Update') lub wyczyszczenie ca³ej bazy danych (przycisk 'Remove DB').
+Aby przegl¹daæ zawartoœæ bazy danych nale¿y przejœæ do zak³adki 'Database' (lewy górny róg). Po naciœniêciu przycisku 'REFRESH' zostanie wyœwietlona ca³a zawrtoœæ bazy danych aby odfiltrowaæ rekordy nale¿y wpisaæ frazê w wybranym polu i ponownie wcisn¹æ przycisk 'REFRESH'.
+Przycisk 'Create CSV' s³u¿y do utworzenia pliku csv który zawiera wyœwietlane recordy w zak³adce 'Database'. Plik zostanie utworzony w folderze z plikiem 'main.exe'.
 
 
 
