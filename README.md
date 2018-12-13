@@ -152,9 +152,10 @@ Zawiera obiekt klasy 'GUI' pozwalaj¹cy uruchomiæ interface graficzny u¿ytkowanik
 ### Instrukcja instalacji
 
 1. Nale¿y pobraæ repozytorjum
+2. W folderze g³ównym nale¿y otworzyæ pod folder 'dist' i uruchomiæ plik wykonywalny 'main.exe'
+3. Opcjonalnie mo¿na utworzyæ skrót folderu w wybranej przez siebie lokalizacji.
 
 
-### Instrukcja dzia³ania
 
 
 
