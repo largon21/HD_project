@@ -336,10 +336,3 @@ class App:
 
 
 
-test = App()
-
-test.CreateWidget()
-# quote = """HAMLET: To be, or not to be--that is the question"""
-# test.Insert_statement(quote)
-
-test.Start_App()

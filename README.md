@@ -1,13 +1,17 @@
 # Hurtownie Danych (Proces ETL - Projekt)
 
-## Dkumentacja techniczna
+## Dokumentacja techniczna
 
-### Wykorzystane technologie
+
+
+## Wykorzystane technologie
 
 - Python
 - SQLite
 
-### Struktura bazy danych
+
+
+## Struktura bazy danych
 
 ```sql
 CREATE TABLE IF NOT EXISTS stocks(
@@ -20,14 +24,17 @@ CREATE TABLE IF NOT EXISTS stocks(
 );
 ```
 
-### Opis wykorzystanych klas
+
+
+## Opis wykorzystanych klas
+
 
 
 
 ### Plik myhtml.py - klasa HTML
 
 
-### Klasy wewnêtrzne
+#### Klasy wewnêtrzne
 
 Pole | Wartoœæ
 ---- | -------
@@ -43,7 +50,7 @@ transform_data() | Brak parametrów | Brak | Przeszukuje strony html zapisane w t
 getRecords() | Brak parametrów | 'record[]' | Zwraca tablicê 'record'
 
 
-### Klasy zewnêtrzne 
+#### Klasy zewnêtrzne 
 
 Klasa | Opis
 ----- | ----
@@ -51,17 +58,18 @@ requests | Pozwala wysy³aæ zapytnia do serverów
 bs4 | Pozwala przeprowadzaæ operacje na plikach html
 
 
+
+
 ### Plik mysqlite.py - klasa Database
 
 
-### Klasy wewnêtrzne
+#### Klasy wewnêtrzne
 
 Pole | Wartoœæ
 ---- | -------
 conn | WskaŸnik do bazy danych 'hd.db'
 c | Cursor zmiennej conn wskazuj¹cy na wybran¹ bazê danych
 selected_records | Tablica przechowywuj¹ca wybrane recordy
-
 
 
 Metoda | Parametry | Wartoœæ zwracana | Opis
@@ -80,9 +88,42 @@ sqlite3 | Pozwala manipulowaæ baz¹ danych sqlite
 
 
 
+### Plik GUI.py - klasa App
 
 
+Pole | Wartoœæ
+---- | -------
+main_window | G³ówne okno programu, obiekt klasy 'tkinter'
+MY_DATABASE | Obiekt klasy wewnêtrznej 'Database'
+My_data_HTML | Obiekt klasy wewnêtrznej 'HTML'
+entry_title | Obiekt klasy 'tkinter.Entry'
+Tbox | Obiekt klasy 'tkinter.Text'
+ProBar | Obiekt klasy 'tkinter.Progressbar'
+Tview | Obiekt klasy 'tkinter.Treeview'
+TboxDB | Obiekt klasy 'tkinter.Text'
+Refresh_Button | Obiekt klasy 'tkinter.Button'
+Title_filter | Obiekt klasy 'tkinter.Entry'
+Period_filter | Obiekt klasy 'tkinter.Entry'
+User_filter | Obiekt klasy 'tkinter.Entry'
+Date_filter | Obiekt klasy 'tkinter.Entry'
+Com_filter | Obiekt klasy 'tkinter.Entry'
+Head_filter | Obiekt klasy 'tkinter.Entry'
 
+
+Metoda | Parametry | Wartoœæ zwracana | Opis
+------ | --------- | ---------------- | ----
+Show_column | 'event' | Brak | Powoduje wyœwietlenie, pola wybranego rekordu w obiekcie 'TboxDB', jako parametr przymuje zdarzenie (klikniêcie prawym przyciskiem myszy)
+Insert_DB | 'DB' | Brak | Powoduje wyœwietlenie rekordów podanych jako parametr 'DB' w obiekcie 'Tview'
+Start_App | Brak parametrów | Brak | Wywo³uje funkcjê 'mainloop()' klasy tkinter
+SelectFromDB | Brak parametrów | Brak | Pobiera wartoœci obiektów 'Title_filter', 'Period_filter', 'User_filter', 'Date_filter', 'Com_filter', 'Head_filter', na podstawie, których wyszukuje rekordy, które s¹ nastêpnie wyœwietlane w obiekcie 'Tview'
+CreateCSV | Brak parametrów | Brak | Tworzy plik 'HD.csv', w pliku g³ównym programu, zawieraj¹cy rekordy wyœwietlone w obiekcie  'Tview'
+RemoveAllDB | Brak parametrów | Brak | Usuwa ca³¹ zawartoœæ bazy danych 'HD.db'
+Extract | Brak parametrów | Brak | Pobiera wartoœæ obiektu 'entry_title' i z tym parametrem wywo³uje funkcje obiektów: 'ProBar.start()', 'ProBar.step()', 'ProBar.stop()', 'My_data_HTML.Start_extract()', 'My_data_HTML.extract_data()' nastêpnie wyœwietla komunikat w obiekcie 'Tbox' 
+Transform | Brak parametrów | Brak | Wywo³uje funkcje obiektów: 'ProBar.start()', 'ProBar.step()', 'ProBar.stop()', 'My_data_HTML.transform_data()', 'My_data_HTML.showupdata()', przetworzone rekordy zapisuje w tablicy 'HTML_records', nastepnie wyœwietla komunikat w obiekcie 'Tbox'
+Load | Brak parametrów | Brak | Wywo³uje funkcje obiektów: 'ProBar.start()', 'ProBar.step()', 'ProBar.stop()', sprawdza czy pobrane rekordy nie istniej¹ ju¿ w bazie danych a nastêpnie ³aduje tych których nie ma w bazie 'HD.db'
+ETL | Brak parametrów | Brak | Wywo³uje fukcje: 'Extract', 'Transform', 'Load', nastepnie wyœwietla komunikat w obiekcie 'Tbox'
+Update | Brak parametrów | Brak | Wywo³uje fukcje: 'Extract', 'Transform', pobieraj¹ce i przetwarzaj¹ce aktualne rekordy, nastêpnie sprawdza czy rekordy zosta³y zmienione i uaktualnia je oraz  sprawdza czy istniej¹ nowe komentarze i dodaje je do bazy danych
+Thread_Me | 'my_fun' | Brak | Wywo³uje funkcje z podanym parametrem 'my_fun' obiektu 'threading.Thread()', oraz funkcjê 'start()' obiektu klasy threading. Parametr 'my_fun' jest wskaŸnikiem do funkcji. Funcja wywo³uje funcjê, której wskaŸnik jest podany jako parametr w nowym w¹tku.  
 
 
 
