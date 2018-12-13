@@ -79,7 +79,7 @@ select() | 'title', 'period', 'username', 'date', 'comment', 'head' | 'chosen_re
 update() | 'records' | 'i' | Porównuje rekordy zapisane w bazie danych i aktualizuje je jeœli zosta³y zmienione, zwraca iloœæ sprawdzonych recordów 'i'
 delete_all_records() | Brak parmetrów | Brak | Usuwa ca³¹ zawartoœæ bazy danych 'hd.db'
 
-### Klasy zewnêtrzne 
+#### Klasy zewnêtrzne 
 
 Klasa | Opis
 ----- | ----
@@ -127,7 +127,7 @@ Update | Brak parametrów | Brak | Wywo³uje fukcje: 'Extract', 'Transform', pobie
 Thread_Me | 'my_fun' | Brak | Wywo³uje funkcje z podanym parametrem 'my_fun' obiektu 'threading.Thread()', oraz funkcjê 'start()' obiektu klasy threading. Parametr 'my_fun' jest wskaŸnikiem do funkcji. Funcja wywo³uje funcjê, której wskaŸnik jest podany jako parametr w nowym w¹tku.  
 
 
-### Klasy zewnêtrzne 
+#### Klasy zewnêtrzne 
 
 Klasa | Opis
 ----- | ----
