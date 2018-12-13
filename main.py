@@ -1,8 +1,7 @@
+import GUI
 
-from GUI import *
 
-
-Application = App()
+Application = GUI.App()
 
 Application.CreateWidget()
 # quote = """HAMLET: To be, or not to be--that is the question"""

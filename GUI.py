@@ -257,7 +257,9 @@ class App:
             self.ProBar.stop()
             return len(self.My_data_HTML.com_links)
         except:
+            self.ProBar.stop()
             print('Extract fail')
+            return 0
 
 
     def Transform(self):
@@ -266,7 +268,7 @@ class App:
             self.ProBar.step()
             self.Tbox.delete(1.0, END)
             self.My_data_HTML.transform_data()
-            self.My_data_HTML.showupdata()  # test, print self.data()- list of data
+            # self.My_data_HTML.showupdata()   test, print self.data()- list of data
             self.HTML_records = self.My_data_HTML.getRecords()
 
 
@@ -275,7 +277,9 @@ class App:
             self.ProBar.stop()
             return len(self.HTML_records)
         except:
+            self.ProBar.stop()
             print('Transform fail')
+            return 0
 
     def Load(self):
         try:
@@ -297,7 +301,9 @@ class App:
             self.ProBar.stop()
             return len(buffer)
         except:
+            self.ProBar.stop()
             print('Load fail')
+            return 0
 
 
     def ETL(self):
