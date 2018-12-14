@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS stocks(
 ### Plik myhtml.py - klasa HTML
 
 
-#### Klasy wewnêtrzne
+#### Klasa HTML
 
 Pole | Wartoœæ
 ---- | -------
@@ -63,20 +63,20 @@ bs4 | Pozwala przeprowadzaæ operacje na plikach html
 ### Plik mysqlite.py - klasa Database
 
 
-#### Klasy wewnêtrzne
+#### Klasa Database
 
 Pole | Wartoœæ
 ---- | -------
 conn | WskaŸnik do bazy danych 'hd.db'
 c | Kursor zmiennej conn wskazuj¹cy na wybran¹ bazê danych
-selected_records | Tablica przechowuj¹ca wybrane recordy
+selected_records | Tablica przechowuj¹ca wybrane rekordy
 
 
 Metoda | Parametry | Wartoœæ zwracana | Opis
 ------ | --------- | ---------------- | ----
 load_data() | 'tuple_data' | Brak | £aduje rekordy podane w tablicy krotek 'tuple_data' do bazy danych 'hd.db'
 select() | 'title', 'period', 'username', 'date', 'comment', 'head' | 'chosen_records[]' | Wyszukuje frazy podane w parametrach w rekordach zapsianych w bazie danych 'hd.db' i zwraca wynik w postaci taplicy krotek
-update() | 'records' | 'i' | Porównuje rekordy zapisane w bazie danych i aktualizuje je jeœli zosta³y zmienione, zwraca iloœæ sprawdzonych recordów 'i'
+update() | 'records' | 'i' | Porównuje rekordy zapisane w bazie danych i aktualizuje je jeœli zosta³y zmienione, zwraca iloœæ sprawdzonych rekordów 'i'
 delete_all_records() | Brak parmetrów | Brak | Usuwa ca³¹ zawartoœæ bazy danych 'hd.db'
 
 #### Klasy zewnêtrzne 
@@ -91,7 +91,7 @@ sqlite3 | Pozwala manipulowaæ baz¹ danych sqlite
 ### Plik GUI.py - klasa App
 
 
-#### Klasy wewnêtrzne
+#### Klasa App
 
 Pole | Wartoœæ
 ---- | -------
@@ -115,7 +115,7 @@ Head_filter | Obiekt klasy 'tkinter.Entry'
 Metoda | Parametry | Wartoœæ zwracana | Opis
 ------ | --------- | ---------------- | ----
 CreateWidget | Brak parametrów | Brak | Tworzy widgety na g³ównym oknie programu - 'main_window'
-Show_column | 'event' | Brak | Powoduje wyœwietlenie, pola wybranego rekordu w obiekcie 'TboxDB', jako parametr przymuje zdarzenie (klikniêcie prawym przyciskiem myszy)
+Show_column | 'event' | Brak | Powoduje wyœwietlenie, pola wybranego rekordu w obiekcie 'TboxDB', jako parametr przymuje zdarzenie (klikniêcie lewym przyciskiem myszy)
 Insert_DB | 'DB' | Brak | Powoduje wyœwietlenie rekordów podanych jako parametr 'DB' w obiekcie 'Tview'
 Start_App | Brak parametrów | Brak | Wywo³uje funkcjê 'mainloop()' klasy tkinter
 SelectFromDB | Brak parametrów | Brak | Pobiera wartoœci obiektów 'Title_filter', 'Period_filter', 'User_filter', 'Date_filter', 'Com_filter', 'Head_filter', na podstawie, których wyszukuje rekordy, które s¹ nastêpnie wyœwietlane w obiekcie 'Tview'
@@ -156,13 +156,13 @@ Zawiera obiekt klasy 'GUI' pozwalaj¹cy uruchomiæ interface graficzny u¿ytkowanik
 3. Opcjonalnie mo¿na utworzyæ skrót folderu 'dist' w wybranej przez siebie lokalizacji.
 
 ### Opis programu
-Program pozwala pobieraæ komentarze na temat wybranego serialu ze strony filmweb.pl.
+Program pozwala pobieraæ komentarze na temat wybranego serialu ze strony 'filmweb.pl'.
 Pobrane informacje s¹ zapisywane w postaci rekordów w bazie danych 'sqlite'.
 Aby pobraæ opinie o serialu nale¿y wpisaæ jego nazwê w polu opisanym 'Podaj tytu³ serialu', nastêpnie wybraæ przycisk 'Extract', 'Transform', 'Load', lub sam przycisk 'ETL'. Dane 
 s¹ pobierane ze strony 'filmweb.pl', (Extract), przetwarzane na odpowiedni format (Transform) i nastêpnie wysy³ane do bazy danych (Load).
 Program pozwala równie¿ na aktualizacjê wybranego tytu³u (przycisk 'Update') lub wyczyszczenie ca³ej bazy danych (przycisk 'Remove DB').
-Aby przegl¹daæ zawartoœæ bazy danych nale¿y przejœæ do zak³adki 'Database' (lewy górny róg). Po naciœniêciu przycisku 'REFRESH' zostanie wyœwietlona ca³a zawrtoœæ bazy danych aby odfiltrowaæ rekordy nale¿y wpisaæ frazê w wybranym polu i ponownie wcisn¹æ przycisk 'REFRESH'.
-Przycisk 'Create CSV' s³u¿y do utworzenia pliku csv, który zawiera wyœwietlane recordy w zak³adce 'Database'. Plik zostanie utworzony w folderze z plikiem 'main.exe'. 
+Aby przegl¹daæ zawartoœæ bazy danych nale¿y przejœæ do zak³adki 'Database' (lewy górny róg). Po naciœniêciu przycisku 'REFRESH' zostanie wyœwietlona ca³a zawartoœæ bazy danych aby odfiltrowaæ rekordy nale¿y wpisaæ frazê w wybranym polu i ponownie wcisn¹æ przycisk 'REFRESH'.
+Przycisk 'Create CSV' s³u¿y do utworzenia pliku csv, który zawiera wyœwietlane rekordy w zak³adce 'Database'. Plik zostanie utworzony w folderze z plikiem 'main.exe'. 
 
 
 
