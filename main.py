@@ -6,7 +6,7 @@ Application = GUI.App()
 Application.CreateWidget()
 # quote = """cytat:  'koniec'"""
 # NEW test.Insert_statement(quote)
-# P5 
+# P6 => masters
 
 
 Application.Start_App()
