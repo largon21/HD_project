@@ -9,5 +9,3 @@ Application.CreateWidget()
 
 
 Application.Start_App()
-
-# test.Insert_statement(quote)
